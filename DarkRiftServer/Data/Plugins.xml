@@ -12,5 +12,5 @@
   <plugin id="9" name="ObjectCacheMonitor" version="1.0.0" />
   <plugin id="10" name="HttpHealthCheck" version="1.0.0" />
   <plugin id="11" name="BadWordFilter" version="1.0.0" />
-  <plugin id="12" name="NetworkManager" version="1.0.0" />
+  <plugin id="12" name="NetworkManager" version="0.0.1" />
 </plugins>
