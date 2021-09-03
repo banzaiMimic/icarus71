@@ -7,3 +7,4 @@ services:
       - "4296:4296/udp"
       - "4296:4296/tcp"
     tty: true
+    
