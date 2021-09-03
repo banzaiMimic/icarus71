@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  darkrift:
+    build: .
+    ports:
+      - "4296:4296/udp"
+      - "4296:4296/tcp"
+    tty: true
+    
