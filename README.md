@@ -1,5 +1,5 @@
 ### running locally
-core git repo in ./DarkRift -> just `git pull` here and should be good
+core git repo in ./DarkRift -> this is at git@github.com:DarkRiftNetworking/DarkRift.git
 check git repo to go see changes etc... but technically all we need from here are the end core .dll files...
 *we need to have these files built after a git pull*
 ```
