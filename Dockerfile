@@ -1,6 +1,7 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS dream
+FROM mcr.microsoft.com/dotnet/aspnet:6.0.0 AS dream
 
-COPY ./DarkRiftServer .
+COPY ./DarkRift/Build/Debug/net6.0/Lib ./Lib
+COPY ./DarkRift/Build/Debug/net6.0/Server.config ./
 COPY /MultiplayerPlugin/bin/Debug/MultiplayerPlugin.dll ./Plugins/
 
 EXPOSE 4296/udp
