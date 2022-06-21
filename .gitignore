@@ -1,1 +1,52 @@
 DarkRiftServer/Logs
+
+UnityClient/[Ll]ibrary/
+UnityClient/[Tt]emp/
+UnityClient/[Oo]bj/
+UnityClient/[Bb]uild/
+UnityClient/[Bb]uilds/
+UnityClient/[Ll]ogs/
+UnityClient/[Uu]ser[Ss]ettings/
+UnityClient/[Mm]emoryCaptures/
+UnityClient/[Rr]ecordings/
+UnityClient/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Visual Studio cache directory
+.vs/
+.gradle/
+
+UnityClient/ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity3D generated file on crash reports
+UnityClient/sysinfo.txt
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+UnityClient/crashlytics-build.properties
+UnityClient/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+UnityClient/[Aa]ssets/[Ss]treamingAssets/aa.meta
+UnityClient/[Aa]ssets/[Ss]treamingAssets/aa/*

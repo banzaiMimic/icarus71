@@ -10,6 +10,9 @@ don't worry about the `2 Warning(s) 5 Error(s)` as the build still compiles
 - run docker-compose and server should startup locally
 `docker-compose up`
 
+### unity client
+load UnityClient project via UnityHub and run
+
 ### info.docker
 handles basically grabbing all the dll files we need and running dotnet to spin server up
 (check Dockerfile)
