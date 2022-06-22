@@ -8,19 +8,19 @@ public class Panel : MonoBehaviour {
   private MenuManager menuManager = null;
 
   private void Awake() {
-    this.canvas = GetComponent<Canvas>();
+    canvas = GetComponent<Canvas>();
   }
 
   public void Setup(MenuManager menuManager) {
-    this.menuManager = menuManager;
+    menuManager = menuManager;
     Hide();
   }
 
   public void Show() {
-    this.canvas.enabled = true;
+    canvas.enabled = true;
   }
 
   public void Hide() {
-    this.canvas.enabled = false;
+    canvas.enabled = false;
   }
 }
