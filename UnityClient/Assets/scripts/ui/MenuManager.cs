@@ -31,12 +31,13 @@ public class MenuManager : MonoBehaviour {
   }
 
   public void PointerClick(object sender, PointerEventArgs e) {
-    Debug.Log("[pointer click]");
-    Debug.Log($"  - e.target.name = {e.target.name}");
     string clickedName = e.target.name;
     switch (clickedName) {
       case "btn_login":
         SetCurrentWithHistory(panels[1]);
+      break;
+      case "btn_submit":
+        SubmitLogin();
       break;
       default:
         if (username.text == USERNAME_PLACEHOLDER) {
@@ -47,6 +48,10 @@ public class MenuManager : MonoBehaviour {
         username.text += key;
       break;
     }
+  }
+
+  private void SubmitLogin() {
+    Debug.Log($"[SubmitLogin] with username {username.text}");
   }
 
   private void SetupPanels() {
