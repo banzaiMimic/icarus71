@@ -6,8 +6,12 @@ using DarkRift.Client.Unity;
 using UnityEngine;
 
 /*
-@Recall just copy from https://github.com/RoboDoig/multiplayer-tutorial/blob/master/Assets/NetworkManager.cs
-whole setup is done already just need to past in here and implement different version of UIManager 
+@Recall - need to send PlayerVR into resources folder... to test this via paralelsync we need the client to spawn in the vrCam, leftHand,
+and rightHand but as a single object without any VRHeadset functionality.
+- move PlayerVR to resources folder and spawn it in on client connection (we can move connect logic to login later)
+- attach a basic keyboard handler to the dev-playerVr object... the send messages get sent on update right now so this will work.
+- if parallelsync has 'client' param or 'dev' etc -> spawn the devPlayerVr
+- run test in parallel to see if positions are updated in both clients
 */
 public class NetworkManager : MonoBehaviour
 {

@@ -10136,6 +10136,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886631942}
   m_CullTransparentMesh: 1
+--- !u!1 &1919733194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2572212146508400022, guid: 27715fbba772e2a42a268895097fc082,
+    type: 3}
+  m_PrefabInstance: {fileID: 1934179370}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1929179872
 GameObject:
   m_ObjectHideFlags: 0
@@ -10279,6 +10285,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 230716046105232190, guid: 27715fbba772e2a42a268895097fc082,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1934179372}
+    - target: {fileID: 230716046105232190, guid: 27715fbba772e2a42a268895097fc082,
+        type: 3}
+      propertyPath: vrCamera
+      value: 
+      objectReference: {fileID: 1919733194}
+    - target: {fileID: 230716046105232190, guid: 27715fbba772e2a42a268895097fc082,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1934179371}
     - target: {fileID: 2572212146508348488, guid: 27715fbba772e2a42a268895097fc082,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,14 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkPlayer : MonoBehaviour {
 
-  public GameObject vrCamera { get; private set; }
-  public GameObject leftHand { get; private set; }
-  public GameObject rightHand { get; private set; }
+  public GameObject vrCamera;
+  public GameObject leftHand;
+  public GameObject rightHand;
 
   public string playerName { get; private set; }
+
+  void Awake() {
+    if (!vrCamera.scene.IsValid()) {
+      throw new Exception("vrCamera not set in NetworkPlayer");
+    }
+  }
 
   void Update() {
     Vector3 cam = new Vector3(vrCamera.transform.position.x, vrCamera.transform.position.y, vrCamera.transform.position.z );
