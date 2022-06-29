@@ -65,6 +65,7 @@ public class NetworkManager : MonoBehaviour
   void Start() {
     Vector3 playerStartPoint = new Vector3(0,0,0);
     if (this.isParrelClone) {
+      VrKill();
       LoadPlayerParrel( playerStartPoint );
     } else {
       if (IsVrAvailable()) {
@@ -72,6 +73,7 @@ public class NetworkManager : MonoBehaviour
         LoadPlayerVr( playerStartPoint );
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse");
+        VrKill();
         LoadPlayerMouse( playerStartPoint );
       }
     }
@@ -87,7 +89,6 @@ public class NetworkManager : MonoBehaviour
   }
 
   private void LoadPlayerMouse(Vector3 position) {
-    VrKill();
     GameObject player = SpawnNetworkPlayer(position);
   }
 
