@@ -1695,6 +1695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb42c39209ee2740bf78559e36ac73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vrCamera: {fileID: 2572212146508400022}
+  leftHand: {fileID: 2572212146508651260}
+  rightHand: {fileID: 2572212146508634830}
 --- !u!1 &2572212146508421014
 GameObject:
   m_ObjectHideFlags: 0

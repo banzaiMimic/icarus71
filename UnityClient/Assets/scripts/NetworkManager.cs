@@ -4,6 +4,9 @@ using DarkRift;
 using DarkRift.Client;
 using DarkRift.Client.Unity;
 using UnityEngine;
+#if UNITY_EDITOR
+using ParrelSync;
+#endif
 
 /*
 @Recall - need to send PlayerVR into resources folder... to test this via paralelsync we need the client to spawn in the vrCam, leftHand,
@@ -18,13 +21,12 @@ public class NetworkManager : MonoBehaviour
   public static NetworkManager INSTANCE;
 
   private UnityClient drClient;
+  private bool isParrelClone = false;
 
   public Dictionary<ushort, NetworkPlayer> networkPlayers = new Dictionary<ushort, NetworkPlayer>();
 
-  void Awake()
-  {
-    if (INSTANCE != null)
-    {
+  void Awake() {
+    if (INSTANCE != null) {
       Destroy (gameObject);
       return;
     }
@@ -33,6 +35,12 @@ public class NetworkManager : MonoBehaviour
 
     drClient = GetComponent<UnityClient>();
     drClient.MessageReceived += MessageReceived;
+    #if UNITY_EDITOR
+      if (ClonesManager.IsClone()) {
+        Debug.Log("this is a clone project via parrelSync local development");
+        this.isParrelClone = true;
+      }
+    #endif
   }
 
   void MessageReceived(object sender, MessageReceivedEventArgs e)
@@ -71,28 +79,24 @@ public class NetworkManager : MonoBehaviour
         ushort ID = reader.ReadUInt16();
         string playerName = reader.ReadString();
 
-        Vector3 position =
-          new Vector3(reader.ReadSingle(),
-            reader.ReadSingle(),
-            reader.ReadSingle());
+        Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
 
         // Player / Network Player Spawn
         GameObject obj;
-        if (ID == drClient.ID) {
+        if (ID == drClient.ID && !this.isParrelClone) {
           // playerConnected's client
-          //@TODO don't immediately spawn player singleton for core client -> after 'joining' some server, then instantiate with:
-          //obj = Instantiate(localPlayerPrefab, position, Quaternion.identity) as GameObject;
-          //@Recall remove below when above is implemented
-          obj = GameObject.Find("PlayerVR") as GameObject;
+          if (this.isParrelClone) {
+            obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
+            obj.AddComponent<ParrelAutoMove>();
+          } else {
+            obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+          }
+          
         } else {
           // network player [non-controllable]
           //@TODO instantiate from resources
           //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
-          obj =
-            Instantiate(Resources.Load("NetworkPlayer"),
-            position,
-            Quaternion.identity) as
-            GameObject;
+          obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
         }
 
         // Get network entity data of prefab and add to network players store
