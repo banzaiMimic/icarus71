@@ -12,7 +12,7 @@ public class Panel : MonoBehaviour {
   }
 
   public void Setup(MenuManager menuManager) {
-    menuManager = menuManager;
+    this.menuManager = menuManager;
     Hide();
   }
 
