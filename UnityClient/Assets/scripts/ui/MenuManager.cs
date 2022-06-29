@@ -4,7 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.Extras;
 using TMPro;
+using DarkRift.Client.Unity;
+using icarus.gg;
 
+// @Recall
+/*
+  should split in 3 ... 
+  -VrMenuManager
+  -MouseMenuManager
+  -shared data / ui screens etc 
+*/
 public class MenuManager : MonoBehaviour {
 
   private const string USERNAME_PLACEHOLDER = "enter username";
@@ -16,14 +25,19 @@ public class MenuManager : MonoBehaviour {
   private Panel currentPanel = null;
   [SerializeField]
   private TextMeshProUGUI username;
+  [SerializeField]
+  private UnityClient drClient;
 
   private List<Panel> panelHistory = new List<Panel>();
   private Panel[] panels = new Panel[2];
 
+  //@Recall need to instantiate or call this after NetworkManager.INSTANCE's Awake call.... isParrelClone has not been updated yet
   private void Awake() {
-    username.text = USERNAME_PLACEHOLDER;
-    leftLaserPointer.PointerClick += PointerClick;
-    rightLaserPointer.PointerClick += PointerClick;
+    if (!NetworkManager.INSTANCE.isParrelClone) {
+      username.text = USERNAME_PLACEHOLDER;
+      leftLaserPointer.PointerClick += PointerClick;
+      rightLaserPointer.PointerClick += PointerClick;
+    }
   }
 
   private void Start() {
@@ -60,6 +74,13 @@ public class MenuManager : MonoBehaviour {
       panel.Setup(this);
     }
     currentPanel.Show();
+  }
+
+  private void ConnectToServer() {
+    //@TODO 
+    // - host & port input ui
+    // - list (hardcode for now) of 'our' core servers
+    Dispatcher.INSTANCE.connectToServer("localhost", 4296);
   }
 
   private void Update() {

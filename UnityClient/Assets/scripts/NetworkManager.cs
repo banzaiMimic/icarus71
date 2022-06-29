@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DarkRift;
 using DarkRift.Client;
 using DarkRift.Client.Unity;
 using UnityEngine;
+using UnityEngine.XR;
+using icarus.gg;
 #if UNITY_EDITOR
 using ParrelSync;
 #endif
@@ -21,7 +24,7 @@ public class NetworkManager : MonoBehaviour
   public static NetworkManager INSTANCE;
 
   private UnityClient drClient;
-  private bool isParrelClone = false;
+  public bool isParrelClone = false;
 
   public Dictionary<ushort, NetworkPlayer> networkPlayers = new Dictionary<ushort, NetworkPlayer>();
 
@@ -41,6 +44,80 @@ public class NetworkManager : MonoBehaviour
         this.isParrelClone = true;
       }
     #endif
+
+  }
+
+  void OnEnable() {
+    Dispatcher.INSTANCE.ConnectToServerAction += HandleConnectToServer;
+  }
+
+  private bool IsVrAvailable() {
+    List<XRDisplaySubsystem> displaySubsystems = new List<XRDisplaySubsystem>();
+    SubsystemManager.GetInstances<XRDisplaySubsystem>(displaySubsystems);
+    foreach (var subsystem in displaySubsystems) {
+      if (subsystem.running) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void Start() {
+    Vector3 playerStartPoint = new Vector3(0,0,0);
+    if (this.isParrelClone) {
+      LoadPlayerParrel( playerStartPoint );
+    } else {
+      if (IsVrAvailable()) {
+        Debug.Log("VR available-- loading PlayerVR");
+        LoadPlayerVr( playerStartPoint );
+      } else {
+        Debug.Log("VR not found-- loading keyboard / mouse");
+        LoadPlayerMouse( playerStartPoint );
+      }
+    }
+  }
+
+  private void LoadPlayerVr(Vector3 position) {
+    //VrInit(); seems to be already init
+    GameObject player = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+  }
+
+  private GameObject SpawnNetworkPlayer(Vector3 position) {
+    return Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
+  }
+
+  private void LoadPlayerMouse(Vector3 position) {
+    VrKill();
+    GameObject player = SpawnNetworkPlayer(position);
+  }
+
+  private void LoadPlayerParrel(Vector3 position) {
+    GameObject player = SpawnNetworkPlayer(position);
+    player.AddComponent<ParrelAutoMove>();
+    player.AddComponent<Camera>();
+  }
+
+  private void VrInit() {
+    UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+    UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StartSubsystems();
+  }
+
+  private void VrKill() {
+    Debug.Log("stopping XR subsystems...");
+    UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StopSubsystems();
+    UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.DeinitializeLoader();
+  }
+
+  void OnDisable() {
+    Dispatcher.INSTANCE.ConnectToServerAction -= HandleConnectToServer;
+  }
+
+  private void HandleConnectToServer(string host, int port) {
+    try {
+      drClient.Connect(host, port, false);
+    } catch(Exception e) {
+      Debug.LogError(e.Message);
+    }
   }
 
   void MessageReceived(object sender, MessageReceivedEventArgs e)
@@ -76,34 +153,44 @@ public class NetworkManager : MonoBehaviour
       using (DarkRiftReader reader = message.GetReader())
       {
         // Read the message data
-        ushort ID = reader.ReadUInt16();
-        string playerName = reader.ReadString();
+        // ushort ID = reader.ReadUInt16();
+        // string playerName = reader.ReadString();
 
-        Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+        // Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
 
-        // Player / Network Player Spawn
-        GameObject obj;
-        if (ID == drClient.ID && !this.isParrelClone) {
-          // playerConnected's client
-          if (this.isParrelClone) {
-            obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
-            obj.AddComponent<ParrelAutoMove>();
-          } else {
-            obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
-          }
+        // // Player / Network Player Spawn
+        // GameObject obj;
+        // if (ID == drClient.ID) {
+        //   // playerConnected's client
+        //   if (this.isParrelClone) {
+
+        //     // --------------------------------------------------------------------------------------
+        //     // only runs in local development via ParrelClone
+        //     // --------------------------------------------------------------------------------------
+            
+            
+        //     // initialize XR (vrsetup)
+        //     UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+        //     UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StartSubsystems();
+
+        //     // --------------------------------------------------------------------------------------
+
+        //   } else {
+        //     obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+        //   }
           
-        } else {
-          // network player [non-controllable]
-          //@TODO instantiate from resources
-          //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
-          obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
-        }
+        // } else {
+        //   // network player [non-controllable]
+        //   //@TODO instantiate from resources
+        //   //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
+        //   obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
+        // }
 
-        // Get network entity data of prefab and add to network players store
-        networkPlayers.Add(ID, obj.GetComponent<NetworkPlayer>());
+        // // Get network entity data of prefab and add to network players store
+        // networkPlayers.Add(ID, obj.GetComponent<NetworkPlayer>());
 
-        // Update player name
-        networkPlayers[ID].SetPlayerName(playerName);
+        // // Update player name
+        // networkPlayers[ID].SetPlayerName(playerName);
       }
     }
   }
