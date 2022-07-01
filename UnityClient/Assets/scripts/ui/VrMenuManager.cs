@@ -14,33 +14,49 @@ using icarus.gg;
   -MouseMenuManager
   -shared data / ui screens etc 
 */
-public class MenuManager : MonoBehaviour {
+public class VrMenuManager : MonoBehaviour {
 
-  private const string USERNAME_PLACEHOLDER = "enter username";
-  [SerializeField]
-  private SteamVR_LaserPointer leftLaserPointer;
-  [SerializeField]
-  private SteamVR_LaserPointer rightLaserPointer;
-  [SerializeField]
-  private Panel currentPanel = null;
-  [SerializeField]
-  private TextMeshProUGUI username;
-  [SerializeField]
-  private UnityClient drClient;
-
-  private List<Panel> panelHistory = new List<Panel>();
-  private Panel[] panels = new Panel[2];
-
-  //@Recall need to instantiate or call this after NetworkManager.INSTANCE's Awake call.... isParrelClone has not been updated yet
-  private void Awake() {
-    if (!NetworkManager.INSTANCE.isParrelClone) {
-      username.text = USERNAME_PLACEHOLDER;
-      leftLaserPointer.PointerClick += PointerClick;
-      rightLaserPointer.PointerClick += PointerClick;
+  static VrMenuManager _instance;
+  public GameObject go;
+  public static VrMenuManager INSTANCE {
+    get { 
+      if (_instance == null) {
+        GameObject go = new GameObject("VrMenuManager");
+        _instance = go.AddComponent<VrMenuManager>();
+        Vector3 position = new Vector3(0,0,0);
+        go = Instantiate(Resources.Load("VrMenuManager"), position, Quaternion.identity) as GameObject;
+      }
+      return _instance;
     }
   }
 
-  private void Start() {
+  private const string USERNAME_PLACEHOLDER = "enter username";
+  private SteamVR_LaserPointer leftLaserPointer { get; set; }
+  private SteamVR_LaserPointer rightLaserPointer { get; set; }
+  private Panel currentPanel { get; set; }
+  private TextMeshProUGUI username { get; set; }
+  private UnityClient drClient;
+  private List<Panel> panelHistory = new List<Panel>();
+  private Panel[] panels = new Panel[2];
+
+  public void Init(
+    SteamVR_LaserPointer leftLaserPointer,
+    SteamVR_LaserPointer rightLaserPointer,
+    TextMeshProUGUI username,
+    Panel panelMain,
+    Panel panelLogin
+  ) {
+
+    this.leftLaserPointer = leftLaserPointer;
+    this.rightLaserPointer = rightLaserPointer;
+    this.username = username;
+    panels[0] = panelMain;
+    panels[1] = panelLogin;
+
+    username.text = USERNAME_PLACEHOLDER;
+    leftLaserPointer.PointerClick += PointerClick;
+    rightLaserPointer.PointerClick += PointerClick;
+
     SetupPanels();
   }
 
@@ -69,10 +85,7 @@ public class MenuManager : MonoBehaviour {
   }
 
   private void SetupPanels() {
-    panels = GetComponentsInChildren<Panel>();
-    foreach (Panel panel in panels) {
-      panel.Setup(this);
-    }
+    currentPanel = panels[0];
     currentPanel.Show();
   }
 
@@ -83,7 +96,7 @@ public class MenuManager : MonoBehaviour {
     Dispatcher.INSTANCE.connectToServer("localhost", 4296);
   }
 
-  private void Update() {
+  void Update() {
     // if primary hand trigger is down -> go to previous (might not add this)
   }
 

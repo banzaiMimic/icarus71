@@ -23,7 +23,7 @@ public class NetworkManager : MonoBehaviour
 {
   public static NetworkManager INSTANCE;
 
-  private UnityClient drClient;
+  private UnityClient drClient { get; set; }
   public bool isParrelClone = false;
 
   public Dictionary<ushort, NetworkPlayer> networkPlayers = new Dictionary<ushort, NetworkPlayer>();
@@ -66,36 +66,17 @@ public class NetworkManager : MonoBehaviour
     Vector3 playerStartPoint = new Vector3(0,0,0);
     if (this.isParrelClone) {
       VrKill();
-      LoadPlayerParrel( playerStartPoint );
+      PlayerManager.INSTANCE.SpawnPlayerParrel(playerStartPoint);
     } else {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
-        LoadPlayerVr( playerStartPoint );
+        PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse");
         VrKill();
-        LoadPlayerMouse( playerStartPoint );
+        PlayerManager.INSTANCE.SpawnNetworkPlayer(playerStartPoint);
       }
     }
-  }
-
-  private void LoadPlayerVr(Vector3 position) {
-    //VrInit(); seems to be already init
-    GameObject player = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
-  }
-
-  private GameObject SpawnNetworkPlayer(Vector3 position) {
-    return Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
-  }
-
-  private void LoadPlayerMouse(Vector3 position) {
-    GameObject player = SpawnNetworkPlayer(position);
-  }
-
-  private void LoadPlayerParrel(Vector3 position) {
-    GameObject player = SpawnNetworkPlayer(position);
-    player.AddComponent<ParrelAutoMove>();
-    player.AddComponent<Camera>();
   }
 
   private void VrInit() {

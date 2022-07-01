@@ -2542,7 +2542,7 @@ GameObject:
   - component: {fileID: 5665330829829418227}
   - component: {fileID: 5665330829829418236}
   m_Layer: 5
-  m_Name: username (TMP)
+  m_Name: username
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7380,9 +7380,8 @@ GameObject:
   - component: {fileID: 5665330830825199129}
   - component: {fileID: 5665330830825199130}
   - component: {fileID: 5665330830825199131}
-  - component: {fileID: 5665330830825199135}
   m_Layer: 5
-  m_Name: MenuManager
+  m_Name: VrMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7453,7 +7452,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5665330830825199131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7471,22 +7470,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5665330830825199135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5665330830825199108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d8a803f57ab944f89c2fad0814032e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftLaserPointer: {fileID: 0}
-  rightLaserPointer: {fileID: 0}
-  currentPanel: {fileID: 5665330830303121808}
-  username: {fileID: 5665330829829418236}
 --- !u!1 &5665330830854440360
 GameObject:
   m_ObjectHideFlags: 0
