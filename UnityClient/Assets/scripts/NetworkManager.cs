@@ -213,43 +213,43 @@ public class NetworkManager : MonoBehaviour
     public PlayerMoveMessage() {}
 
     public PlayerMoveMessage(
-      Vector3 vrCamera,
-      Vector3 leftHand,
-      Vector3 rightHand
+      float camX,
+      float camY,
+      float camZ
     ) {
-      this.vrCamera = vrCamera;
-      this.leftHand = leftHand;
-      this.rightHand = rightHand;
+      this.vrCamera = new Vector3(camX, camY, camZ);
+      // this.leftHand = leftHand;
+      // this.rightHand = rightHand;
     }
 
     public void Deserialize(DeserializeEvent e) {
       ID = e.Reader.ReadUInt16();
       vrCamera = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
-      leftHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
-      rightHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
+      //leftHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
+      //rightHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
     }
 
     public void Serialize(SerializeEvent e) {
       e.Writer.Write(vrCamera.x);
       e.Writer.Write(vrCamera.y);
       e.Writer.Write(vrCamera.z);
-      e.Writer.Write(leftHand.x);
-      e.Writer.Write(leftHand.y);
-      e.Writer.Write(leftHand.z);
-      e.Writer.Write(rightHand.x);
-      e.Writer.Write(rightHand.y);
-      e.Writer.Write(rightHand.z);
+      // e.Writer.Write(leftHand.x);
+      // e.Writer.Write(leftHand.y);
+      // e.Writer.Write(leftHand.z);
+      // e.Writer.Write(rightHand.x);
+      // e.Writer.Write(rightHand.y);
+      // e.Writer.Write(rightHand.z);
     }
   }
 
   public void SendPlayerMoveMessage(
-    Vector3 vrCamera,
-    Vector3 leftHand,
-    Vector3 rightHand
+    float camX,
+    float camY,
+    float camZ
   ) {
     using (DarkRiftWriter writer = DarkRiftWriter.Create())
     {
-      writer.Write(new PlayerMoveMessage(vrCamera, leftHand, rightHand));
+      writer.Write(new PlayerMoveMessage(camX, camY, camZ));
       using (Message message = Message.Create(Tags.PlayerMove, writer))
       {
         drClient.SendMessage(message, SendMode.Unreliable);

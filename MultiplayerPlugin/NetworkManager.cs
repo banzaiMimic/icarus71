@@ -152,23 +152,23 @@ namespace MultiplayerPlugin
         {
           using (DarkRiftReader reader = message.GetReader())
           {
-            float newX = reader.ReadSingle();
-            float newY = reader.ReadSingle();
-            float newZ = reader.ReadSingle();
+            Vector3 camPos = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+            // Vector3 lhPos = reader.ReadSingle();
+            // Vector3 rhPos = reader.ReadSingle();
 
             Player player = players[e.Client];
 
-            player.X = newX;
-            player.Y = newY;
-            player.Z = newZ;
+            player.camX = camPos.position.x;
+            player.camY = camPos.position.y;
+            player.camZ = camPos.position.z;
 
             // send this player's updated position back to all clients except the client that sent the message
             using (DarkRiftWriter writer = DarkRiftWriter.Create())
             {
               writer.Write(player.ID);
-              writer.Write(player.X);
-              writer.Write(player.Y);
-              writer.Write(player.Z);
+              writer.Write(player.camX);
+              writer.Write(player.camY);
+              writer.Write(player.camZ);
 
               message.Serialize(writer);
             }

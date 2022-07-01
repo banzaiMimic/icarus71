@@ -60,6 +60,7 @@ public class PlayerManager : MonoBehaviour {
 
   public GameObject SpawnPlayerParrel(Vector3 position) {
     GameObject parrelPlayer = SpawnNetworkPlayer(position);
+    parrelPlayer.GetComponent<NetworkPlayer>().isConnected = true;
     parrelPlayer.AddComponent<ParrelAutoMove>();
     parrelPlayer.AddComponent<Camera>();
     return parrelPlayer;

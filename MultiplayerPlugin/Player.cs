@@ -9,9 +9,10 @@ namespace MultiplayerPlugin
 		public string playerName { get; set; }
 		public bool isReady { get; set; }
 
-		public float X { get; set; }
-		public float Y { get; set; }
-		public float Z { get; set; }
+		public float camX { get; set; }
+		public float camY { get; set; }
+		public float camZ { get; set; }
+    //@TODO lhX lhY lhZ and rh...
 
 		public byte ColorR { get; set; }
 		public byte ColorG { get; set; }
@@ -30,13 +31,9 @@ namespace MultiplayerPlugin
 
 			Random r = new Random();
 
-			X = Math.Ceiling((float)r.NextDouble() * 5f);
-			Y = 0;
-			Z = 0;
-
-			ColorR = (byte)r.Next(0, 200);
-			ColorG = (byte)r.Next(0, 200);
-			ColorB = (byte)r.Next(0, 200);
+			// ColorR = (byte)r.Next(0, 200);
+			// ColorG = (byte)r.Next(0, 200);
+			// ColorB = (byte)r.Next(0, 200);
 
       Debug.Log($"New Player created x{X} y{Y} z{Z}");
 		}
@@ -46,13 +43,13 @@ namespace MultiplayerPlugin
 			ID = e.Reader.ReadUInt16();
 			playerName = e.Reader.ReadString();
 
-			X = e.Reader.ReadSingle();
-			Y = e.Reader.ReadSingle();
-			Z = e.Reader.ReadSingle();
+			camX = e.Reader.ReadSingle();
+			camY = e.Reader.ReadSingle();
+			camZ = e.Reader.ReadSingle();
 
-			ColorR = e.Reader.ReadByte();
-			ColorG = e.Reader.ReadByte();
-			ColorB = e.Reader.ReadByte();
+			// ColorR = e.Reader.ReadByte();
+			// ColorG = e.Reader.ReadByte();
+			// ColorB = e.Reader.ReadByte();
 		}
 
 		public void Serialize(SerializeEvent e)
@@ -60,13 +57,13 @@ namespace MultiplayerPlugin
 			e.Writer.Write(ID);
 			e.Writer.Write(playerName);
 
-			e.Writer.Write(X);
-			e.Writer.Write(Y);
-			e.Writer.Write(Z);
+			e.Writer.Write(camX);
+			e.Writer.Write(camY);
+			e.Writer.Write(camZ);
 
-			e.Writer.Write(ColorR);
-			e.Writer.Write(ColorG);
-			e.Writer.Write(ColorB);
+			// e.Writer.Write(ColorR);
+			// e.Writer.Write(ColorG);
+			// e.Writer.Write(ColorB);
 		}
 	}
 }
