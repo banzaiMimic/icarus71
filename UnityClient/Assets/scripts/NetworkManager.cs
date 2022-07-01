@@ -138,13 +138,15 @@ public class NetworkManager : MonoBehaviour
         ushort ID = reader.ReadUInt16();
         // string playerName = reader.ReadString();
 
-        Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+        //Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+        Vector3 position = new Vector3(0,0,0);
 
         // Player / Network Player Spawn
         GameObject player;
         if (ID == drClient.ID) {
           // playerConnected's client
           if (this.isParrelClone) {
+            Debug.Log("Spawning PlayerParrel at " + position);
             player = PlayerManager.INSTANCE.SpawnPlayerParrel(position);
           } else {
             player = PlayerManager.INSTANCE.playerVr;

@@ -30,9 +30,9 @@ namespace MultiplayerPlugin
 
 			Random r = new Random();
 
-			X = (float)r.NextDouble() * 5f;
-			Y = (float)r.NextDouble() * 5f;
-			Z = (float)r.NextDouble() * 5f;
+			X = Math.Ceiling((float)r.NextDouble() * 5f);
+			Y = 0;
+			Z = 0;
 
 			ColorR = (byte)r.Next(0, 200);
 			ColorG = (byte)r.Next(0, 200);
