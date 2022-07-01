@@ -37,6 +37,8 @@ namespace MultiplayerPlugin
 			ColorR = (byte)r.Next(0, 200);
 			ColorG = (byte)r.Next(0, 200);
 			ColorB = (byte)r.Next(0, 200);
+
+      Debug.Log($"New Player created x{X} y{Y} z{Z}");
 		}
 
 		public void Deserialize(DeserializeEvent e)

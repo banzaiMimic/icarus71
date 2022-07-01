@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour {
     }
   }
 
-  private GameObject playerVr;
+  public GameObject playerVr;
   private List<GameObject> networkPlayers = new List<GameObject>();
 
   void Awake() {
@@ -45,10 +45,11 @@ public class PlayerManager : MonoBehaviour {
 
   }
 
-  public void SpawnPlayerVr(Vector3 position) {
+  public GameObject SpawnPlayerVr(Vector3 position) {
     playerVr = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
     Vector3 vrMenuPosition = new Vector3(position.x, position.y + 1.5f, 2);
     SpawnVrMenuManager(vrMenuPosition);
+    return playerVr;
   }
 
   public GameObject SpawnNetworkPlayer(Vector3 position) {
@@ -57,10 +58,11 @@ public class PlayerManager : MonoBehaviour {
     return networkPlayer;
   }
 
-  public void SpawnPlayerParrel(Vector3 position) {
+  public GameObject SpawnPlayerParrel(Vector3 position) {
     GameObject parrelPlayer = SpawnNetworkPlayer(position);
     parrelPlayer.AddComponent<ParrelAutoMove>();
     parrelPlayer.AddComponent<Camera>();
+    return parrelPlayer;
   }
 
 }

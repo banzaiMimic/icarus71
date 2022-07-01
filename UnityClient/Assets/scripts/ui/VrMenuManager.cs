@@ -100,7 +100,7 @@ public class VrMenuManager : MonoBehaviour {
     //@TODO 
     // - host & port input ui
     // - list (hardcode for now) of 'our' core servers
-    Dispatcher.INSTANCE.connectToServer("localhost", 4296);
+    // *using Dispatcher for now i.e. Dispatcher.INSTANCE.connectToServer("localhost", 4296);
   }
 
   void Update() {

@@ -66,15 +66,15 @@ public class NetworkManager : MonoBehaviour
     Vector3 playerStartPoint = new Vector3(0,0,0);
     if (this.isParrelClone) {
       VrKill();
-      PlayerManager.INSTANCE.SpawnPlayerParrel(playerStartPoint);
+      Dispatcher.INSTANCE.connectToServer("localhost", 4296);
     } else {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
+        Dispatcher.INSTANCE.connectToServer("localhost", 4296);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse");
         VrKill();
-        PlayerManager.INSTANCE.SpawnNetworkPlayer(playerStartPoint);
       }
     }
   }
@@ -135,41 +135,30 @@ public class NetworkManager : MonoBehaviour
       using (DarkRiftReader reader = message.GetReader())
       {
         // Read the message data
-        // ushort ID = reader.ReadUInt16();
+        ushort ID = reader.ReadUInt16();
         // string playerName = reader.ReadString();
 
-        // Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+        Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
 
         // Player / Network Player Spawn
-        GameObject obj;
+        GameObject player;
         if (ID == drClient.ID) {
           // playerConnected's client
-          // if (this.isParrelClone) {
-
-          //   // --------------------------------------------------------------------------------------
-          //   // only runs in local development via ParrelClone
-          //   // --------------------------------------------------------------------------------------
-            
-            
-          //   // initialize XR (vrsetup)
-          //   UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
-          //   UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StartSubsystems();
-
-          //   // --------------------------------------------------------------------------------------
-
-          // } else {
-          //   obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
-          // }
+          if (this.isParrelClone) {
+            player = PlayerManager.INSTANCE.SpawnPlayerParrel(position);
+          } else {
+            player = PlayerManager.INSTANCE.playerVr;
+          }
           
         } else {
           // network player [non-controllable]
           //@TODO instantiate from resources
           //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
-          PlayerManager.INSTANCE.SpawnNetworkPlayer();
+          player = PlayerManager.INSTANCE.SpawnNetworkPlayer(position);
         }
 
         // // Get network entity data of prefab and add to network players store
-        // networkPlayers.Add(ID, obj.GetComponent<NetworkPlayer>());
+        networkPlayers.Add(ID, player.GetComponent<NetworkPlayer>());
 
         // // Update player name
         // networkPlayers[ID].SetPlayerName(playerName);
