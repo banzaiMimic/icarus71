@@ -39,14 +39,16 @@ public class PlayerManager : MonoBehaviour {
       rightLaserPointer,
       username,
       panelMain,
-      panelLogin
+      panelLogin,
+      position
     );
 
   }
 
   public void SpawnPlayerVr(Vector3 position) {
     playerVr = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
-    SpawnVrMenuManager(position);
+    Vector3 vrMenuPosition = new Vector3(position.x, position.y + 1.5f, 2);
+    SpawnVrMenuManager(vrMenuPosition);
   }
 
   public GameObject SpawnNetworkPlayer(Vector3 position) {

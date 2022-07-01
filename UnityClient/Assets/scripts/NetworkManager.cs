@@ -140,33 +140,33 @@ public class NetworkManager : MonoBehaviour
 
         // Vector3 position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
 
-        // // Player / Network Player Spawn
-        // GameObject obj;
-        // if (ID == drClient.ID) {
-        //   // playerConnected's client
-        //   if (this.isParrelClone) {
+        // Player / Network Player Spawn
+        GameObject obj;
+        if (ID == drClient.ID) {
+          // playerConnected's client
+          // if (this.isParrelClone) {
 
-        //     // --------------------------------------------------------------------------------------
-        //     // only runs in local development via ParrelClone
-        //     // --------------------------------------------------------------------------------------
+          //   // --------------------------------------------------------------------------------------
+          //   // only runs in local development via ParrelClone
+          //   // --------------------------------------------------------------------------------------
             
             
-        //     // initialize XR (vrsetup)
-        //     UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
-        //     UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StartSubsystems();
+          //   // initialize XR (vrsetup)
+          //   UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+          //   UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager.StartSubsystems();
 
-        //     // --------------------------------------------------------------------------------------
+          //   // --------------------------------------------------------------------------------------
 
-        //   } else {
-        //     obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
-        //   }
+          // } else {
+          //   obj = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+          // }
           
-        // } else {
-        //   // network player [non-controllable]
-        //   //@TODO instantiate from resources
-        //   //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
-        //   obj = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
-        // }
+        } else {
+          // network player [non-controllable]
+          //@TODO instantiate from resources
+          //obj = Instantiate(networkPlayerPrefab, position, Quaternion.identity) as GameObject;
+          PlayerManager.INSTANCE.SpawnNetworkPlayer();
+        }
 
         // // Get network entity data of prefab and add to network players store
         // networkPlayers.Add(ID, obj.GetComponent<NetworkPlayer>());

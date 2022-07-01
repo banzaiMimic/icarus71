@@ -44,12 +44,15 @@ public class VrMenuManager : MonoBehaviour {
     SteamVR_LaserPointer rightLaserPointer,
     TextMeshProUGUI username,
     Panel panelMain,
-    Panel panelLogin
+    Panel panelLogin,
+    Vector3 position
   ) {
 
     this.leftLaserPointer = leftLaserPointer;
     this.rightLaserPointer = rightLaserPointer;
     this.username = username;
+    panelMain.transform.position = position;
+    panelLogin.transform.position = position;
     panels[0] = panelMain;
     panels[1] = panelLogin;
 
@@ -69,6 +72,9 @@ public class VrMenuManager : MonoBehaviour {
       case "btn_submit":
         SubmitLogin();
       break;
+      case "btn_devTest":
+        ConnectToServer();
+      break;
       default:
         if (username.text == USERNAME_PLACEHOLDER) {
           username.text = "";
@@ -85,6 +91,7 @@ public class VrMenuManager : MonoBehaviour {
   }
 
   private void SetupPanels() {
+    panels[1].Hide();
     currentPanel = panels[0];
     currentPanel.Show();
   }
