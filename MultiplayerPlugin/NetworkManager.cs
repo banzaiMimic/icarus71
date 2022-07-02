@@ -152,15 +152,31 @@ namespace MultiplayerPlugin
         {
           using (DarkRiftReader reader = message.GetReader())
           {
-            Vector3 camPos = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
-            // Vector3 lhPos = reader.ReadSingle();
-            // Vector3 rhPos = reader.ReadSingle();
+            float camPosX = reader.ReadSingle();
+            float camPosY = reader.ReadSingle();
+            float camPosZ = reader.ReadSingle();
+
+            float lhPosX = reader.ReadSingle();
+            float lhPosY = reader.ReadSingle();
+            float lhPosZ = reader.ReadSingle();
+
+            float rhPosX = reader.ReadSingle();
+            float rhPosY = reader.ReadSingle();
+            float rhPosZ = reader.ReadSingle();
 
             Player player = players[e.Client];
 
-            player.camX = camPos.position.x;
-            player.camY = camPos.position.y;
-            player.camZ = camPos.position.z;
+            player.camX = camPosX;
+            player.camY = camPosY;
+            player.camZ = camPosZ;
+
+            player.leftHandX = lhPosX;
+            player.leftHandY = lhPosY;
+            player.leftHandZ = lhPosZ;
+
+            player.rightHandX = rhPosX;
+            player.rightHandY = rhPosY;
+            player.rightHandZ = rhPosZ;
 
             // send this player's updated position back to all clients except the client that sent the message
             using (DarkRiftWriter writer = DarkRiftWriter.Create())
@@ -169,6 +185,14 @@ namespace MultiplayerPlugin
               writer.Write(player.camX);
               writer.Write(player.camY);
               writer.Write(player.camZ);
+              
+              writer.Write(player.leftHandX);
+              writer.Write(player.leftHandY);
+              writer.Write(player.leftHandZ);
+
+              writer.Write(player.rightHandX);
+              writer.Write(player.rightHandY);
+              writer.Write(player.rightHandZ);
 
               message.Serialize(writer);
             }

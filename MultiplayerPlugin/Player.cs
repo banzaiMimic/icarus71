@@ -12,16 +12,20 @@ namespace MultiplayerPlugin
 		public float camX { get; set; }
 		public float camY { get; set; }
 		public float camZ { get; set; }
-    //@TODO lhX lhY lhZ and rh...
+    
+    public float leftHandX { get; set; }
+		public float leftHandY { get; set; }
+		public float leftHandZ { get; set; }
+    
+    public float rightHandX { get; set; }
+		public float rightHandY { get; set; }
+		public float rightHandZ { get; set; }
 
 		public byte ColorR { get; set; }
 		public byte ColorG { get; set; }
 		public byte ColorB { get; set; }
 
-		public Player()
-    {
-
-    }
+		public Player() {}
 
 		public Player(ushort _ID, string _playerName)
 		{
@@ -34,8 +38,6 @@ namespace MultiplayerPlugin
 			// ColorR = (byte)r.Next(0, 200);
 			// ColorG = (byte)r.Next(0, 200);
 			// ColorB = (byte)r.Next(0, 200);
-
-      Debug.Log($"New Player created x{X} y{Y} z{Z}");
 		}
 
 		public void Deserialize(DeserializeEvent e)

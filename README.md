@@ -3,12 +3,12 @@ core git repo in ./DarkRift -> this is at git@github.com:DarkRiftNetworking/Dark
 check git repo to go see changes etc... but technically all we need from here are the end core .dll files...
 *we need to have these files built after a git pull*
 ```
-cd DarkRift
+// rebuild MultiplayerPlugin for deploys
+cd MultiplayerPlugin
 dotnet build .
+// git push these changes up and on redeploy server will pull the updated MultiplayerPlugin.dll
 ```
-don't worry about the `2 Warning(s) 5 Error(s)` as the build still compiles
-- run docker-compose and server should startup locally
-`docker-compose up`
+- run `docker-compose up` and server should startup locally
 
 ### unity client
 load UnityClient project via UnityHub and run
@@ -25,4 +25,11 @@ manually build on server deploy
 keep docker container running
 ```
 ENTRYPOINT ["tail", "-f", "/dev/null"]
+```
+
+### running multiplayer server via docker on a vm
+docker.sh
+```
+docker build -t dev:1.0 .
+docker run -dt -p 4296:4296 dev:1.0
 ```
