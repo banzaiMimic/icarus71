@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour {
 
   public GameObject playerVr;
   private List<GameObject> networkPlayers = new List<GameObject>();
+  private GameObject teleporting;
 
   void Awake() {
 
@@ -49,6 +50,8 @@ public class PlayerManager : MonoBehaviour {
     playerVr = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
     Vector3 vrMenuPosition = new Vector3(position.x, position.y + 1.5f, 2);
     SpawnVrMenuManager(vrMenuPosition);
+    Vector3 teleportPos = new Vector3(0, 0.01f, 0);
+    teleporting = Instantiate(Resources.Load("Teleporting"), teleportPos, Quaternion.identity) as GameObject;
     return playerVr;
   }
 
