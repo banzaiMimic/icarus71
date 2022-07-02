@@ -11,7 +11,7 @@ namespace MultiplayerPlugin
   class NetworkManager : Plugin
   {
     public override bool ThreadSafe => false;
-    public override Version Version => new Version(0, 0, 1);
+    public override Version Version => new Version(0, 0, 2);
     Dictionary<IClient, Player> players = new Dictionary<IClient, Player>();
 
     public NetworkManager(PluginLoadData pluginLoadData) : base(pluginLoadData)
