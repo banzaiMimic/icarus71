@@ -153,6 +153,7 @@ public class NetworkManager : MonoBehaviour
             player = PlayerManager.INSTANCE.SpawnPlayerParrel(position);
           } else {
             player = PlayerManager.INSTANCE.playerVr;
+            player.GetComponent<NetworkPlayer>().isConnected = true;
           }
           
         } else {
