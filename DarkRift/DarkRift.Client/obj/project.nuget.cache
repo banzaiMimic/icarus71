@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "taSetnu5jiz8+Pvad4rVkF1H95UoyVnoca/jAHTuM9SenjaI9lNrU0VJ9kW9PVaX9QzfU7MQaTK68QqjJO72HQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\banzai\\dev\\git\\banzai\\icarus71\\DarkRift\\DarkRift.Client\\DarkRift.Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net35\\1.0.2\\microsoft.netframework.referenceassemblies.net35.1.0.2.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

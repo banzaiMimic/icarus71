@@ -1,0 +1,10 @@
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\bin\Debug\net3.5\DarkRift.xml
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\bin\Debug\net3.5\DarkRift.dll
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\bin\Debug\net3.5\DarkRift.pdb
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.csproj.AssemblyReference.cache
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.AssemblyInfoInputs.cache
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.AssemblyInfo.cs
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.csproj.CoreCompileInputs.cache
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.dll
+C:\Users\banzai\dev\git\banzai\icarus71\DarkRift\DarkRift\obj\Debug\net3.5\DarkRift.pdb

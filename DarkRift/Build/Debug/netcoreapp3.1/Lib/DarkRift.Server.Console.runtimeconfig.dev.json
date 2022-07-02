@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\banzai\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\banzai\\.nuget\\packages"
+    ]
+  }
+}

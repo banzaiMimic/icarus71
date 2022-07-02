@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "dgSpecHash": "HNjFWwM11A3gRl6ecRQzXCgJRfFylr8gRpuV6L9Md1SDcuxYDfWU50A/nB1n0zp+7wGM2w29EaounSIAw79ELA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\banzai\\dev\\git\\banzai\\icarus71\\DarkRift\\DarkRift.Server.Console\\DarkRift.Server.Console.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.0.0\\microsoft.netcore.dotnethostpolicy.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.0.0\\microsoft.netcore.dotnethostresolver.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\msbuildtasks\\1.5.0.235\\msbuildtasks.1.5.0.235.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\runtime.win-x86.microsoft.netcore.app\\2.0.0\\runtime.win-x86.microsoft.netcore.app.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\runtime.win-x86.microsoft.netcore.dotnetapphost\\2.0.0\\runtime.win-x86.microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\runtime.win-x86.microsoft.netcore.dotnethostpolicy\\2.0.0\\runtime.win-x86.microsoft.netcore.dotnethostpolicy.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\runtime.win-x86.microsoft.netcore.dotnethostresolver\\2.0.0\\runtime.win-x86.microsoft.netcore.dotnethostresolver.2.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\banzai\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
