@@ -22,6 +22,9 @@ and rightHand but as a single object without any VRHeadset functionality.
 public class NetworkManager : MonoBehaviour
 {
   public static NetworkManager INSTANCE;
+  //public readonly string HOST = "157.245.94.24";
+  public readonly string HOST = "localhost";
+  public readonly int PORT = 4296;
 
   private UnityClient drClient { get; set; }
   public bool isParrelClone = false;
@@ -66,12 +69,12 @@ public class NetworkManager : MonoBehaviour
     Vector3 playerStartPoint = new Vector3(0,0,0);
     if (this.isParrelClone) {
       VrKill();
-      Dispatcher.INSTANCE.connectToServer("localhost", 4296);
+      Dispatcher.INSTANCE.connectToServer( HOST, PORT);
     } else {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
-        Dispatcher.INSTANCE.connectToServer("localhost", 4296);
+        Dispatcher.INSTANCE.connectToServer( HOST, PORT);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse");
         VrKill();
@@ -202,8 +205,7 @@ public class NetworkManager : MonoBehaviour
     }
   }
 
-  private class PlayerMoveMessage : IDarkRiftSerializable
-  {
+  private class PlayerMoveMessage : IDarkRiftSerializable {
     public ushort ID { get; set; }
 
     public Vector3 vrCamera { get; set; }
@@ -213,45 +215,55 @@ public class NetworkManager : MonoBehaviour
     public PlayerMoveMessage() {}
 
     public PlayerMoveMessage(
-      float camX,
-      float camY,
-      float camZ
+      float camX, float camY, float camZ,
+      float lhX, float lhY, float lhZ,
+      float rhX, float rhY, float rhZ
     ) {
       this.vrCamera = new Vector3(camX, camY, camZ);
-      // this.leftHand = leftHand;
-      // this.rightHand = rightHand;
+      this.leftHand = new Vector3(lhX, lhY, lhZ);
+      this.rightHand = new Vector3(rhX, rhY, rhZ);
     }
 
     public void Deserialize(DeserializeEvent e) {
       ID = e.Reader.ReadUInt16();
       vrCamera = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
-      //leftHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
-      //rightHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
+      leftHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
+      rightHand = new Vector3(e.Reader.ReadSingle(), e.Reader.ReadSingle(), e.Reader.ReadSingle());
     }
 
     public void Serialize(SerializeEvent e) {
       e.Writer.Write(vrCamera.x);
       e.Writer.Write(vrCamera.y);
       e.Writer.Write(vrCamera.z);
-      // e.Writer.Write(leftHand.x);
-      // e.Writer.Write(leftHand.y);
-      // e.Writer.Write(leftHand.z);
-      // e.Writer.Write(rightHand.x);
-      // e.Writer.Write(rightHand.y);
-      // e.Writer.Write(rightHand.z);
+      e.Writer.Write(leftHand.x);
+      e.Writer.Write(leftHand.y);
+      e.Writer.Write(leftHand.z);
+      e.Writer.Write(rightHand.x);
+      e.Writer.Write(rightHand.y);
+      e.Writer.Write(rightHand.z);
     }
   }
 
   public void SendPlayerMoveMessage(
     float camX,
     float camY,
-    float camZ
+    float camZ,
+    float lhX,
+    float lhY,
+    float lhZ,
+    float rhX,
+    float rhY,
+    float rhZ
   ) {
-    using (DarkRiftWriter writer = DarkRiftWriter.Create())
-    {
-      writer.Write(new PlayerMoveMessage(camX, camY, camZ));
-      using (Message message = Message.Create(Tags.PlayerMove, writer))
-      {
+    using (DarkRiftWriter writer = DarkRiftWriter.Create()) {
+
+      writer.Write(new PlayerMoveMessage(
+        camX, camY, camZ,
+        lhX, lhY, lhZ,
+        rhX, rhY, rhZ
+        ));
+
+      using (Message message = Message.Create(Tags.PlayerMove, writer)) {
         drClient.SendMessage(message, SendMode.Unreliable);
       }
     }

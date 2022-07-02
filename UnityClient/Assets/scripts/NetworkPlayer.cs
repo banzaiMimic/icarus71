@@ -23,9 +23,9 @@ public class NetworkPlayer : MonoBehaviour {
       Vector3 lh = new Vector3(leftHand.transform.position.x, leftHand.transform.position.y, leftHand.transform.position.z );
       Vector3 rh = new Vector3(rightHand.transform.position.x, rightHand.transform.position.y, rightHand.transform.position.z );
       NetworkManager.INSTANCE.SendPlayerMoveMessage( 
-        cam.x,
-        cam.y,
-        cam.z
+        cam.x, cam.y, cam.z,
+        lh.x, lh.y, lh.z,
+        rh.x, rh.y, rh.z
       );
     }
   }

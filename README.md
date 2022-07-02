@@ -27,9 +27,10 @@ keep docker container running
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 ```
 
-### running multiplayer server via docker on a vm
-docker.sh
+### server deployment
+login to do.sheep-network
 ```
-docker build -t dev:1.0 .
-docker run -dt -p 4296:4296 dev:1.0
+cd /home/dev/icarus71
+git pull
+./docker.sh
 ```

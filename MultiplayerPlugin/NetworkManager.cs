@@ -144,14 +144,13 @@ namespace MultiplayerPlugin
     }
 
     //@Recall update this to new (3 vector params) for vrCamera, leftHand, and rightHand
-    void OnPlayerMoveMessage(object sender, MessageReceivedEventArgs e)
-    {
-      using (Message message = e.GetMessage() as Message)
-      {
-        if (message.Tag == Tags.PlayerMoveTag)
-        {
-          using (DarkRiftReader reader = message.GetReader())
-          {
+    void OnPlayerMoveMessage(object sender, MessageReceivedEventArgs e) {
+      try {
+        
+        using (Message message = e.GetMessage() as Message) {
+        
+        if (message.Tag == Tags.PlayerMoveTag) {
+          using (DarkRiftReader reader = message.GetReader()) {
             float camPosX = reader.ReadSingle();
             float camPosY = reader.ReadSingle();
             float camPosZ = reader.ReadSingle();
@@ -201,6 +200,9 @@ namespace MultiplayerPlugin
               client.SendMessage(message, e.SendMode);
           }
         }
+      }
+      } catch(Exception err) {
+        Console.WriteLine(err.Message);
       }
     }
 
