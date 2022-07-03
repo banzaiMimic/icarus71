@@ -35,7 +35,6 @@ public class VrMenuManager : MonoBehaviour {
   private SteamVR_LaserPointer rightLaserPointer { get; set; }
   private Panel currentPanel { get; set; }
   private TextMeshProUGUI username { get; set; }
-  private UnityClient drClient;
   private List<Panel> panelHistory = new List<Panel>();
   private Panel[] panels = new Panel[2];
 

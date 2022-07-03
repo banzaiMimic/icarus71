@@ -34,4 +34,8 @@ public class NetworkPlayer : MonoBehaviour {
     this.playerName = playerName;
   }
 
+  public void Destroy() {
+    Destroy(this);
+  }
+
 }
