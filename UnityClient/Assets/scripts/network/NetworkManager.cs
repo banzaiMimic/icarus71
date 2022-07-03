@@ -77,7 +77,7 @@ public class NetworkManager : MonoBehaviour {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
       } else {
-        Debug.Log("VR not found-- loading keyboard / mouse");
+        Debug.Log("VR not found-- loading keyboard / mouse [not implemented]");
         VrKill();
       }
     }
@@ -114,6 +114,7 @@ public class NetworkManager : MonoBehaviour {
     }
   }
 
+  //@Todo move to network actions 
   public void SendPlayerMoveMessage(
     float camX,
     float camY,
