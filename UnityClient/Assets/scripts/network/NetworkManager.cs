@@ -7,22 +7,25 @@ using DarkRift.Client.Unity;
 using UnityEngine;
 using UnityEngine.XR;
 using icarus.gg;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using ParrelSync;
 #endif
 
-/*
-@Recall - need to send PlayerVR into resources folder... to test this via paralelsync we need the client to spawn in the vrCam, leftHand,
-and rightHand but as a single object without any VRHeadset functionality.
-- move PlayerVR to resources folder and spawn it in on client connection (we can move connect logic to login later)
-- attach a basic keyboard handler to the dev-playerVr object... the send messages get sent on update right now so this will work.
-- if parallelsync has 'client' param or 'dev' etc -> spawn the devPlayerVr
-- run test in parallel to see if positions are updated in both clients
+/// <summary>
+/// initializes Dark Rift 2 client 
+/// </summary>
+public class NetworkManager : MonoBehaviour {
+
+  /*
+  @Recall
+  for different scenes need to
+  - keep track of every player's active scene
+  - only send / react to those messages on the scenes with all players that are sending...
 */
-public class NetworkManager : MonoBehaviour
-{
+
   public static NetworkManager INSTANCE;
-  //public readonly string HOST = "157.245.94.24";
+
   public readonly string HOST = "localhost";
   public readonly int PORT = 4296;
 
@@ -74,7 +77,6 @@ public class NetworkManager : MonoBehaviour
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
-        Dispatcher.INSTANCE.connectToServer( HOST, PORT);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse");
         VrKill();
@@ -109,6 +111,7 @@ public class NetworkManager : MonoBehaviour
   {
     using (Message message = e.GetMessage() as Message)
     {
+      //@Todo should be able to do this using a map
       if (message.Tag == Tags.PlayerConnect)
       {
         PlayerConnect (sender, e);
@@ -131,6 +134,14 @@ public class NetworkManager : MonoBehaviour
     //UIManager.singleton.PopulateConnectedPlayers (networkPlayers);
   }
 
+  void SceneLoad(object sender, MessageReceivedEventArgs e) {
+    using (Message message = e.GetMessage()) {
+      using (DarkRiftReader reader = message.GetReader()) {
+
+      }
+    }
+  }
+
   void PlayerConnect(object sender, MessageReceivedEventArgs e)
   {
     using (Message message = e.GetMessage())
@@ -147,11 +158,12 @@ public class NetworkManager : MonoBehaviour
         // Player / Network Player Spawn
         GameObject player;
         if (ID == drClient.ID) {
-          // playerConnected's client
+          
           if (this.isParrelClone) {
             Debug.Log("Spawning PlayerParrel at " + position);
             player = PlayerManager.INSTANCE.SpawnPlayerParrel(position);
           } else {
+            // core client
             player = PlayerManager.INSTANCE.playerVr;
             player.GetComponent<NetworkPlayer>().isConnected = true;
           }

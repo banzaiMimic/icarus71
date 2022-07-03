@@ -72,8 +72,8 @@ public class VrMenuManager : MonoBehaviour {
       case "btn_submit":
         SubmitLogin();
       break;
-      case "btn_devTest":
-        ConnectToServer();
+      case "btn_localhost":
+        Dispatcher.INSTANCE.connectToServer( NetworkManager.INSTANCE.HOST, NetworkManager.INSTANCE.PORT);
       break;
       default:
         if (username.text == USERNAME_PLACEHOLDER) {
@@ -86,6 +86,11 @@ public class VrMenuManager : MonoBehaviour {
     }
   }
 
+  private void HideMenuUi() {
+    panels[0].Hide();
+    panels[1].Hide();
+  }
+
   private void SubmitLogin() {
     Debug.Log($"[SubmitLogin] with username {username.text}");
   }
@@ -96,15 +101,8 @@ public class VrMenuManager : MonoBehaviour {
     currentPanel.Show();
   }
 
-  private void ConnectToServer() {
-    //@TODO 
-    // - host & port input ui
-    // - list (hardcode for now) of 'our' core servers
-    // *using Dispatcher for now i.e. Dispatcher.INSTANCE.connectToServer("localhost", 4296);
-  }
-
   void Update() {
-    // if primary hand trigger is down -> go to previous (might not add this)
+    
   }
 
   public void GoToPrevious() {

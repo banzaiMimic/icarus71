@@ -1625,7 +1625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2572212146508348488}
   - component: {fileID: 2572212146502573380}
-  - component: {fileID: 230716046105232190}
+  - component: {fileID: 6988129651845186664}
   m_Layer: 0
   m_Name: PlayerVR
   m_TagString: Untagged
@@ -1683,7 +1683,7 @@ MonoBehaviour:
     actionPath: /actions/default/in/HeadsetOnHead
     needsReinit: 1
   allowToggleTo2D: 1
---- !u!114 &230716046105232190
+--- !u!114 &6988129651845186664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1692,12 +1692,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2572212146508418096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb42c39209ee2740bf78559e36ac73e, type: 3}
+  m_Script: {fileID: 11500000, guid: 94b8fc3a39c0bb74e8f6bdd9d04b7acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   vrCamera: {fileID: 2572212146508400022}
   leftHand: {fileID: 2572212146508651260}
   rightHand: {fileID: 2572212146508634830}
+  isConnected: 0
 --- !u!1 &2572212146508421014
 GameObject:
   m_ObjectHideFlags: 0
