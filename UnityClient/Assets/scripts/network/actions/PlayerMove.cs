@@ -44,4 +44,29 @@ public sealed class PlayerMove {
     }
   }
 
+  public void Dispatch(
+    float camX,
+    float camY,
+    float camZ,
+    float lhX,
+    float lhY,
+    float lhZ,
+    float rhX,
+    float rhY,
+    float rhZ
+  ){
+    using (DarkRiftWriter writer = DarkRiftWriter.Create()) {
+
+      writer.Write(new PlayerMoveMessage(
+        camX, camY, camZ,
+        lhX, lhY, lhZ,
+        rhX, rhY, rhZ
+        ));
+
+      using (Message message = Message.Create(Tags.PlayerMove, writer)) {
+        DARK_CLIENT.SendMessage(message, SendMode.Unreliable);
+      }
+    }
+  }
+
 }

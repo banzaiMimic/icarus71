@@ -7,13 +7,6 @@ using TMPro;
 using DarkRift.Client.Unity;
 using icarus.gg;
 
-// @Recall
-/*
-  should split in 3 ... 
-  -VrMenuManager
-  -MouseMenuManager
-  -shared data / ui screens etc 
-*/
 public class VrMenuManager : MonoBehaviour {
 
   static VrMenuManager _instance;

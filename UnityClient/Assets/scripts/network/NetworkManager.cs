@@ -114,29 +114,4 @@ public class NetworkManager : MonoBehaviour {
     }
   }
 
-  //@Todo move to network actions 
-  public void SendPlayerMoveMessage(
-    float camX,
-    float camY,
-    float camZ,
-    float lhX,
-    float lhY,
-    float lhZ,
-    float rhX,
-    float rhY,
-    float rhZ
-  ) {
-    using (DarkRiftWriter writer = DarkRiftWriter.Create()) {
-
-      writer.Write(new PlayerMoveMessage(
-        camX, camY, camZ,
-        lhX, lhY, lhZ,
-        rhX, rhY, rhZ
-        ));
-
-      using (Message message = Message.Create(Tags.PlayerMove, writer)) {
-        DARK_CLIENT.SendMessage(message, SendMode.Unreliable);
-      }
-    }
-  }
 }
