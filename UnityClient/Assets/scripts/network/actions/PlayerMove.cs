@@ -64,7 +64,7 @@ public sealed class PlayerMove {
         ));
 
       using (Message message = Message.Create(Tags.PlayerMove, writer)) {
-        DARK_CLIENT.SendMessage(message, SendMode.Unreliable);
+        NetworkManager.INSTANCE.darkClient.SendMessage(message, SendMode.Unreliable);
       }
     }
   }

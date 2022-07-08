@@ -30,7 +30,7 @@ public sealed class PlayerConnect {
 
         // Player / Network Player Spawn
         GameObject player;
-        if ( ID == NetworkManager.INSTANCE.DARK_CLIENT.ID ) {
+        if ( ID == NetworkManager.INSTANCE.darkClient.ID ) {
           
           if (ClientInfo.INSTANCE.isParrelClone) {
             Debug.Log("Spawning PlayerParrel at " + position);

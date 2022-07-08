@@ -55,6 +55,10 @@ public class PlayerManager : MonoBehaviour {
     return playerVr;
   }
 
+  public void EnterMech(Vector3 visorPosition) {
+    playerVr.transform.Find("SteamVRObjects/VrCameraWrap").gameObject.transform.position = visorPosition;
+  }
+
   public GameObject SpawnNetworkPlayer(Vector3 position) {
     GameObject networkPlayer = Instantiate(Resources.Load("NetworkPlayer"), position, Quaternion.identity) as GameObject;
     this.networkPlayers.Add(networkPlayer);

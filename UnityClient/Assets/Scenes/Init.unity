@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27709adac09b024c9ad94800a258273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isParrelClone: 0
 --- !u!1 &316170154
 GameObject:
   m_ObjectHideFlags: 0

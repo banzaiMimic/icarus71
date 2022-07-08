@@ -13,7 +13,7 @@ using ParrelSync;
 #endif
 
 /// <summary>
-/// initializes Dark Rift 2 client 
+/// initializes Dark Rift 2 client and Spawns Player(s)
 /// </summary>
 public class NetworkManager : MonoBehaviour {
 
@@ -29,9 +29,12 @@ public class NetworkManager : MonoBehaviour {
   public readonly string HOST = "localhost";
   public readonly int PORT = 4296;
 
-  public UnityClient DARK_CLIENT { get; private set; }
+  public UnityClient darkClient { get; private set; }
 
   public Dictionary<ushort, NetworkPlayer> networkPlayers {get; set;} = new Dictionary<ushort, NetworkPlayer>();
+
+  //@Todo move mech out of here?
+  public GameObject mech0;
 
   void Awake() {
     if (INSTANCE != null) {
@@ -41,8 +44,8 @@ public class NetworkManager : MonoBehaviour {
 
     INSTANCE = this;
 
-    DARK_CLIENT = GetComponent<UnityClient>();
-    DARK_CLIENT.MessageReceived += MessageHandler.INSTANCE.MessageReceived;
+    darkClient = GetComponent<UnityClient>();
+    darkClient.MessageReceived += MessageHandler.INSTANCE.MessageReceived;
     #if UNITY_EDITOR
       if (ClonesManager.IsClone()) {
         Debug.Log("this is a clone project via parrelSync local development");
@@ -76,6 +79,7 @@ public class NetworkManager : MonoBehaviour {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
+        PlayerManager.INSTANCE.EnterMech(mech0.transform.Find("VisorOrigin").position);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse [not implemented]");
         VrKill();
@@ -100,7 +104,7 @@ public class NetworkManager : MonoBehaviour {
 
   private void HandleConnectToServer(string host, int port) {
     try {
-      DARK_CLIENT.Connect(host, port, false);
+      darkClient.Connect(host, port, false);
     } catch(Exception e) {
       Debug.LogError(e.Message);
     }
