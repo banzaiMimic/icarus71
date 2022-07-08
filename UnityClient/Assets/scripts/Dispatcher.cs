@@ -7,6 +7,7 @@ namespace icarus.gg {
 
   private static readonly Dispatcher instance = new Dispatcher();
   public event Action<string, int> ConnectToServerAction;
+  public event Action<float, float, float> RotateMechCockpitAction;
 
   // Explicit static constructor to tell C# compiler
   // not to mark type as beforefieldinit
@@ -22,6 +23,12 @@ namespace icarus.gg {
   public void connectToServer(string host, int port) {
     if (ConnectToServerAction != null) {
       ConnectToServerAction( host, port );
+    }
+  }
+
+  public void rotateMechCockpit(float x, float y, float z) {
+    if (RotateMechCockpitAction != null) {
+      RotateMechCockpitAction( x, y, z );
     }
   }
 }

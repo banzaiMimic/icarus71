@@ -23,7 +23,11 @@ public class PlayerManager : MonoBehaviour {
   private GameObject teleporting;
 
   void Awake() {
+    
+  }
 
+  void Update() {
+    
   }
 
   private void SpawnVrMenuManager(Vector3 position) {
@@ -55,8 +59,12 @@ public class PlayerManager : MonoBehaviour {
     return playerVr;
   }
 
-  public void EnterMech(Vector3 visorPosition) {
-    playerVr.transform.Find("SteamVRObjects/VrCameraWrap").gameObject.transform.position = visorPosition;
+  public Camera getVrCam() {
+    return playerVr.transform.Find("SteamVRObjects/VrCameraWrap/VRCamera").GetComponent<Camera>();
+  }
+
+  public void EnterMech(Transform visorPosition) {
+    playerVr.transform.Find("SteamVRObjects/VrCameraWrap").gameObject.transform.position = visorPosition.position;
   }
 
   public GameObject SpawnNetworkPlayer(Vector3 position) {

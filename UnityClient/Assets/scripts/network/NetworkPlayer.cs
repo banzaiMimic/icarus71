@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ElRaccoone.Tweens;
+
+using icarus.gg;
 
 public class NetworkPlayer : MonoBehaviour {
 
@@ -29,6 +32,14 @@ public class NetworkPlayer : MonoBehaviour {
         rh.x, rh.y, rh.z
       );
     }
+    //Debug.Log("update method vrCamera not null --");
+    //Debug.Log($"camera rotation: {vrCamera.transform.rotation.x}, {vrCamera.transform.rotation.y} {vrCamera.transform.rotation.z}");
+    UpdateRotation(vrCamera.transform);
+  }
+
+  public void UpdateRotation(Transform visor) {
+    //Dispatcher.INSTANCE.rotateMechCockpit(visor.rotation.x, visor.rotation.y, visor.rotation.z);
+    Dispatcher.INSTANCE.rotateMechCockpit(visor.eulerAngles.x, visor.eulerAngles.y, visor.eulerAngles.z);
   }
 
   public void SetPlayerName(string playerName) {

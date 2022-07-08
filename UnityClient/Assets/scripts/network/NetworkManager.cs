@@ -34,7 +34,7 @@ public class NetworkManager : MonoBehaviour {
   public Dictionary<ushort, NetworkPlayer> networkPlayers {get; set;} = new Dictionary<ushort, NetworkPlayer>();
 
   //@Todo move mech out of here?
-  public GameObject mech0;
+  public GameObject visorOrigin;
 
   void Awake() {
     if (INSTANCE != null) {
@@ -79,7 +79,7 @@ public class NetworkManager : MonoBehaviour {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
-        PlayerManager.INSTANCE.EnterMech(mech0.transform.Find("VisorOrigin").position);
+        PlayerManager.INSTANCE.EnterMech(visorOrigin.transform);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse [not implemented]");
         VrKill();

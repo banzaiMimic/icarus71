@@ -254,6 +254,13 @@
         "com.unity.xr.legacyinputhelpers": "2.1.4"
       }
     },
+    "nl.elraccoone.tweens": {
+      "version": "git+https://github.com/jeffreylanters/unity-tweens",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e79126aab8d1e0e71ff5cd3b2d772e2fd7a27f72"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
