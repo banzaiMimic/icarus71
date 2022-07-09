@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ElRaccoone.Tweens;
 
 using icarus.gg;
 
@@ -14,6 +13,9 @@ public class DevTest : MonoBehaviour {
   public float strength = 1f;
   public float strengthY = 1f;
   public float viewPointDistance = 6.0f;
+  private Vector3 viewingPoint = new Vector3(0, 0, 0);
+  [SerializeField]
+  private LineController lineController;
 
   void Awake() {
     Dispatcher.INSTANCE.RotateMechCockpitAction += onRotateMechCockpit;
@@ -22,6 +24,10 @@ public class DevTest : MonoBehaviour {
 
   void Destroy() {
     Dispatcher.INSTANCE.RotateMechCockpitAction -= onRotateMechCockpit;
+  }
+
+  void DrawLine(Vector3 start, Vector3 end) {
+    
   }
 
   private void onRotateMechCockpit(float x, float y, float z) {
@@ -34,12 +40,18 @@ public class DevTest : MonoBehaviour {
 
     // get Vector3 point in front of camera view
     //Camera vrCam = PlayerManager.INSTANCE.getVrCam();
-    Vector3 point = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
-    mechCockpit.transform.LookAt(point);
     
+    // ---
+    viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
+    
+    mechCockpit.transform.LookAt(viewingPoint);
+    // ---
+
     //dev-ref
     //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
     //cube.transform.position = point;
+    Vector3[] points = new Vector3[] { mechCockpit.transform.position, viewingPoint };
+    lineController.DrawLine( points );
 
 
   }
