@@ -13,15 +13,15 @@ public class DevTest : MonoBehaviour {
   public float strength = 1f;
   public float strengthY = 1f;
   public float viewPointDistance = 6.0f;
-  [SerializeField]
-  private LineController lineController;
+  // [SerializeField]
+  // private LineController lineController;
   private bool lockMechCockpitRotation = false;
   private float mcRotationMaxX = 334f;
   private float mcRotationMinX = 34f;
   private float mcRotationYLimit = 60f;
 
   void Awake() {
-    mechCockpit.transform.localRotation = Quaternion.identity;
+    //mechCockpit.transform.localRotation = Quaternion.identity;
   }
 
 /*
@@ -48,23 +48,18 @@ recall individual limit checks (lock x OR y not all?)
   }
 
   private void Update() {
-    Vector3 viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
-    Vector3 camRot = Camera.main.transform.localEulerAngles;
-    Vector3 camPos = Camera.main.transform.position;
+    // Vector3 viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
+    // Vector3 camRot = Camera.main.transform.localEulerAngles;
+    // Vector3 camPos = Camera.main.transform.position;
 
-    if (isOverRotating(camRot)) {
+    // if (isOverRotating(camRot)) {
       
-    } else {
-      mechCockpit.transform.LookAt(viewingPoint);
-      mechCockpit.transform.position = camPos;
-    }
+    // } else {
+    //   mechCockpit.transform.LookAt(viewingPoint);
+    //   mechCockpit.transform.position = camPos;
+    // }
 
-    DrawLine( mechCockpit.transform.position, viewingPoint);
-  }
-
-  private void DrawLine(Vector3 start, Vector3 end) {
-    Vector3[] points = new Vector3[] { start, end };
-    lineController.DrawLine( points );
+    // DrawLine( mechCockpit.transform.position, viewingPoint);
   }
 
 }
