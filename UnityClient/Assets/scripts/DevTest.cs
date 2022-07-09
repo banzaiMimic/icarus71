@@ -13,7 +13,6 @@ public class DevTest : MonoBehaviour {
   public float strength = 1f;
   public float strengthY = 1f;
   public float viewPointDistance = 6.0f;
-  private Vector3 viewingPoint = new Vector3(0, 0, 0);
   [SerializeField]
   private LineController lineController;
   private bool lockMechCockpitRotation = false;
@@ -22,16 +21,7 @@ public class DevTest : MonoBehaviour {
   private float mcRotationYLimit = 60f;
 
   void Awake() {
-    Dispatcher.INSTANCE.UpdateMechCockpitAction += onUpdateMechCockpit;
     mechCockpit.transform.localRotation = Quaternion.identity;
-  }
-
-  void Destroy() {
-    Dispatcher.INSTANCE.UpdateMechCockpitAction -= onUpdateMechCockpit;
-  }
-
-  void DrawLine(Vector3 start, Vector3 end) {
-    
   }
 
 /*
@@ -58,6 +48,7 @@ recall individual limit checks (lock x OR y not all?)
   }
 
   private void Update() {
+    Vector3 viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
     Vector3 camRot = Camera.main.transform.localEulerAngles;
     Vector3 camPos = Camera.main.transform.position;
 
@@ -67,23 +58,13 @@ recall individual limit checks (lock x OR y not all?)
       mechCockpit.transform.LookAt(viewingPoint);
       mechCockpit.transform.position = camPos;
     }
+
+    DrawLine( mechCockpit.transform.position, viewingPoint);
   }
 
-  private void onUpdateMechCockpit(float rx, float ry, float rz, float px, float py, float pz) {
-
-    Vector3 camPos = Camera.main.transform.position;
-    viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
-
-    //@Recall we dont need any dispatches here we have access to Camera.main -_-
-    // ---
-
-    //dev-ref
-    //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-    //cube.transform.position = point;
-    Vector3[] points = new Vector3[] { mechCockpit.transform.position, viewingPoint };
+  private void DrawLine(Vector3 start, Vector3 end) {
+    Vector3[] points = new Vector3[] { start, end };
     lineController.DrawLine( points );
-
-
   }
 
 }
