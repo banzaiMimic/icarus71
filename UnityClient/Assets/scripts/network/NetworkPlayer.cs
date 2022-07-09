@@ -34,12 +34,16 @@ public class NetworkPlayer : MonoBehaviour {
     }
     //Debug.Log("update method vrCamera not null --");
     //Debug.Log($"camera rotation: {vrCamera.transform.rotation.x}, {vrCamera.transform.rotation.y} {vrCamera.transform.rotation.z}");
-    UpdateRotation(vrCamera.transform);
+    
+    UpdatePosition(vrCamera.transform);
   }
 
-  public void UpdateRotation(Transform visor) {
+  public void UpdatePosition(Transform visor) {
     //Dispatcher.INSTANCE.rotateMechCockpit(visor.rotation.x, visor.rotation.y, visor.rotation.z);
-    Dispatcher.INSTANCE.rotateMechCockpit(visor.eulerAngles.x, visor.eulerAngles.y, visor.eulerAngles.z);
+    Dispatcher.INSTANCE.updateMechCockpitPosition(
+      visor.eulerAngles.x, visor.eulerAngles.y, visor.eulerAngles.z,
+      visor.position.x, visor.position.y, visor.position.z
+    );
   }
 
   public void SetPlayerName(string playerName) {

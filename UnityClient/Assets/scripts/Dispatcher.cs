@@ -7,7 +7,7 @@ namespace icarus.gg {
 
   private static readonly Dispatcher instance = new Dispatcher();
   public event Action<string, int> ConnectToServerAction;
-  public event Action<float, float, float> RotateMechCockpitAction;
+  public event Action<float, float, float, float, float, float> UpdateMechCockpitAction;
 
   // Explicit static constructor to tell C# compiler
   // not to mark type as beforefieldinit
@@ -26,9 +26,9 @@ namespace icarus.gg {
     }
   }
 
-  public void rotateMechCockpit(float x, float y, float z) {
-    if (RotateMechCockpitAction != null) {
-      RotateMechCockpitAction( x, y, z );
+  public void updateMechCockpitPosition(float rx, float ry, float rz, float px, float py, float pz) {
+    if (UpdateMechCockpitAction != null) {
+      UpdateMechCockpitAction( rx, ry, rz, px, py, pz );
     }
   }
 }

@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour {
   }
 
   void Update() {
-    
+
   }
 
   private void SpawnVrMenuManager(Vector3 position) {

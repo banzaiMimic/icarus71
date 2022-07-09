@@ -16,35 +16,65 @@ public class DevTest : MonoBehaviour {
   private Vector3 viewingPoint = new Vector3(0, 0, 0);
   [SerializeField]
   private LineController lineController;
+  private bool lockMechCockpitRotation = false;
+  private float mcRotationMaxX = 334f;
+  private float mcRotationMinX = 34f;
+  private float mcRotationYLimit = 60f;
 
   void Awake() {
-    Dispatcher.INSTANCE.RotateMechCockpitAction += onRotateMechCockpit;
+    Dispatcher.INSTANCE.UpdateMechCockpitAction += onUpdateMechCockpit;
     mechCockpit.transform.localRotation = Quaternion.identity;
   }
 
   void Destroy() {
-    Dispatcher.INSTANCE.RotateMechCockpitAction -= onRotateMechCockpit;
+    Dispatcher.INSTANCE.UpdateMechCockpitAction -= onUpdateMechCockpit;
   }
 
   void DrawLine(Vector3 start, Vector3 end) {
     
   }
 
-  private void onRotateMechCockpit(float x, float y, float z) {
+/*
+recall individual limit checks (lock x OR y not all?)
+- @Todo figure out how to map origins / pivot points better and not have to invert ys  (facing direction)
+*/
+  private bool isOverRotating(Vector3 vrCameraRotation) {
+    Debug.Log("---");
+    Debug.Log($"checking rotation.x {vrCameraRotation.x} vs mcRotationXMax {mcRotationMaxX} and mcRotationMinX {mcRotationMinX}");
+    Debug.Log($"checking rotation.x {vrCameraRotation.y}");
+    if (
+      vrCameraRotation.x >= mcRotationMinX && vrCameraRotation.x <= mcRotationMaxX 
+      
+    ) {
+      return true;
+    }
+    // if (
+    //   vrCameraRotation.x >= mcRotationXMax || vrCameraRotation.x <= mcRotationXMax ||
+    //   //vrCameraRotation.y >= mcRotationYLimit || vrCameraRotation.y <= mcRotationYLimit
+    // ) {
+    //   return true;
+    // }
+    return false;
+  }
 
-    // Transform cockpit = mechCockpit.transform;
-    // Debug.Log($"[DevTest] - onRotate called ({x},{y},{z})");
-    // Debug.Log($"  - cockpit current rotation ({cockpit.rotation.x},{cockpit.rotation.y},{cockpit.rotation.z})");
-    // Vector3 rotationUpdate = new Vector3(-x * strength,y * strengthY + 180,z * strength);
-    // cockpit.localRotation = Quaternion.Euler(rotationUpdate);
+  private void Update() {
+    Vector3 camRot = Camera.main.transform.localEulerAngles;
+    Vector3 camPos = Camera.main.transform.position;
 
-    // get Vector3 point in front of camera view
-    //Camera vrCam = PlayerManager.INSTANCE.getVrCam();
-    
-    // ---
+    if (isOverRotating(camRot)) {
+      
+    } else {
+      mechCockpit.transform.LookAt(viewingPoint);
+      mechCockpit.transform.position = camPos;
+    }
+  }
+
+  private void onUpdateMechCockpit(float rx, float ry, float rz, float px, float py, float pz) {
+
+    Vector3 camPos = Camera.main.transform.position;
     viewingPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, viewPointDistance));
-    
-    mechCockpit.transform.LookAt(viewingPoint);
+
+    //@Recall we dont need any dispatches here we have access to Camera.main -_-
     // ---
 
     //dev-ref
