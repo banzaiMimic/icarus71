@@ -6,7 +6,7 @@ using DarkRift.Client;
 using DarkRift.Client.Unity;
 using UnityEngine;
 using UnityEngine.XR;
-using gg.icarus;
+using IcarusGG;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using ParrelSync;

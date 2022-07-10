@@ -344,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &150867078
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -593,6 +593,7 @@ MonoBehaviour:
   invertCockpitY: 1
   viewDistance: 6
   enterMechInterractable: {fileID: 745348299}
+  moveMech: 0
   manualOverride: 0
   lineController: {fileID: 1842767979}
   viewTarget: {fileID: 48699934}
@@ -605,7 +606,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452179764}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 4.98

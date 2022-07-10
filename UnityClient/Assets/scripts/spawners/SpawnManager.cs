@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace gg.icarus {
+namespace IcarusGG {
 
   public class SpawnManager : MonoBehaviour {
 

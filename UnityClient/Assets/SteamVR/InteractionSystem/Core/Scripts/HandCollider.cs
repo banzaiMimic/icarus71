@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using IcarusGG;
+
 namespace Valve.VR.InteractionSystem
 {
     public class HandCollider : MonoBehaviour
@@ -278,6 +280,18 @@ namespace Valve.VR.InteractionSystem
 
                 hand.hand.TriggerHapticPulse(length, 100, intensity);
             }
+        }
+
+        void OnTriggerEnter(Collider other) {
+          Dispatcher.INSTANCE.Log($"[HandCollider] trigger enter on other.tag {other.tag}");
+        }
+
+        void OnTriggerExit(Collider other) {
+          Dispatcher.INSTANCE.Log($"[HandCollider] trigger exit on other.tag {other.tag}");
+        }
+
+        void OnCollisionExit(Collider other) {
+          Dispatcher.INSTANCE.Log($"[HandCollider] collision exit on other.tag {other.tag}");
         }
 
     }

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using Valve.VR.Extras;
 using TMPro;
 using DarkRift.Client.Unity;
-using gg.icarus;
+using IcarusGG;
 
 public class VrMenuManager : MonoBehaviour {
 

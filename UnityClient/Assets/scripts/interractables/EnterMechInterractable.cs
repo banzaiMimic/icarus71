@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace gg.icarus {
+namespace IcarusGG {
 
   public class EnterMechInterractable : MonoBehaviour {
 
@@ -16,11 +16,11 @@ namespace gg.icarus {
       Debug.Log($"EnterMech trigger exit by {other.tag}.tag");
     }
 
-    void OnColliderEnter(Collider other) {
+    void OnCollisionEnter(Collider other) {
       Debug.Log($"EnterMech collider enter by {other.tag}.tag");
     }
 
-    void OnColliderExit(Collider other) {
+    void OnCollisionExit(Collider other) {
       Debug.Log($"EnterMech collider exit by {other.tag}.tag");
     }
 

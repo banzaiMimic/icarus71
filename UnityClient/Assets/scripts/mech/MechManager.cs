@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 //using UnityEngine;
 
-namespace gg.icarus {
+namespace IcarusGG {
 
   public sealed class MechManager {
 

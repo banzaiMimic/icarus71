@@ -1,4 +1,4 @@
-namespace gg.icarus {
+namespace IcarusGG {
   using UnityEngine;
 
   public class MakeTransparent : MonoBehaviour {

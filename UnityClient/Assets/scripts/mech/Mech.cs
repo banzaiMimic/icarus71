@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace gg.icarus {
+namespace IcarusGG {
 
   // currently attached to Mech 3d obj
   public class Mech : MonoBehaviour {
@@ -21,6 +21,8 @@ namespace gg.icarus {
     private float viewDistance = 6f;
     [SerializeField]
     private GameObject enterMechInterractable;
+    [SerializeField]
+    private bool moveMech = false;
 
     // - dev.util
     [SerializeField] private bool manualOverride = false;
@@ -34,18 +36,17 @@ namespace gg.icarus {
     }
 
     void Update() {
-      //@Recall just add an offset for the cam and keep moving lol
-      Vector3 viewingPoint = GetViewingPoint(viewDistance);
-      Vector3 rotation = Camera.main.transform.localEulerAngles;
+      // Vector3 viewingPoint = GetViewingPoint(viewDistance);
+      // Vector3 rotation = Camera.main.transform.localEulerAngles;
 
-      if (manualOverride) {
-        // force move the camera so its actual
-        viewingPoint = viewTarget.position;
-        rotation = rotateTarget.localEulerAngles;
-        //Debug.Log($"rotation is : {rotation}");
-      }
+      // if (manualOverride) {
+      //   viewingPoint = viewTarget.position;
+      //   rotation = rotateTarget.localEulerAngles;
+      // }
 
-      MoveCockpit(rotation, viewingPoint);
+      // if (moveMech) {
+      //   MoveCockpit(rotation, viewingPoint);
+      // }
       DrawVisionLine();
     }
 
@@ -74,7 +75,7 @@ namespace gg.icarus {
     // -- collisions / triggers
 
     void OnTriggerEnter(Collider other) {
-      Debug.Log($"trigger enter at mech {uid} by {other.tag}.tag");
+      Debug.Log($"[mech] trigger enter at mech {uid} by {other.tag}.tag");
       if (other.tag == "Player") {
         // collision with PlayerColider inside of VrCameraWarp
         enterMechInterractable.SetActive(true);
@@ -82,19 +83,19 @@ namespace gg.icarus {
     }
 
     void OnTriggerExit(Collider other) {
-      Debug.Log($"trigger exit at mech {uid} by {other.tag}.tag");
+      Debug.Log($"[mech] trigger exit at mech {uid} by {other.tag}.tag");
       if (other.tag == "Player") {
         // collision with PlayerColider inside of VrCameraWarp
         enterMechInterractable.SetActive(false);
       }
     }
 
-    void OnColliderEnter(Collider other) {
-      Debug.Log($"collider enter at mech {uid} by {other.tag}.tag");
+    void OnCollisionEnter(Collision other) {
+      Debug.Log($"[mech] Collision enter at mech {uid} by {other.collider.tag}.tag");
     }
 
-    void OnColliderExit(Collider other) {
-      Debug.Log($"collider exit at mech {uid} by {other.tag}.tag");
+    void OnCollisionExit(Collision other) {
+      Debug.Log($"[mech] Collision exit at mech {uid} by {other.collider.tag}.tag");
     }
 
     // ------------------------------------------------------------

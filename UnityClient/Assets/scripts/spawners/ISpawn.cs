@@ -2,7 +2,7 @@ using UnityEngine;
 /*
   spawns / despawns gameObjects at Vector3 position
 */
-namespace gg.icarus {
+namespace IcarusGG {
   
   public interface ISpawn {
 

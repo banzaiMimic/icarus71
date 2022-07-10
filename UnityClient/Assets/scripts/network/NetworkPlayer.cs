@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ElRaccoone.Tweens;
 
-using gg.icarus;
+using IcarusGG;
 
 public class NetworkPlayer : MonoBehaviour {
 

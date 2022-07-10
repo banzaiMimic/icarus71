@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace gg.icarus {
+namespace IcarusGG {
 
   public sealed class Dispatcher {
 
     private static readonly Dispatcher instance = new Dispatcher();
     public event Action<string, int> ConnectToServerAction;
-    public event Action<float, float, float, float, float, float> UpdateMechCockpitAction;
 
     static Dispatcher() {}
     private Dispatcher(){}
@@ -22,6 +21,10 @@ namespace gg.icarus {
       if (ConnectToServerAction != null) {
         ConnectToServerAction( host, port );
       }
+    }
+
+    public void Log(string msg) {
+      Debug.Log($"[Dispatcher] {msg}");
     }
   }
 }
