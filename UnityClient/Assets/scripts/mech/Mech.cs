@@ -19,6 +19,8 @@ namespace gg.icarus {
     private bool invertCockpitY = true;
     [SerializeField] 
     private float viewDistance = 6f;
+    [SerializeField]
+    private GameObject enterMechInterractable;
 
     // - dev.util
     [SerializeField] private bool manualOverride = false;
@@ -70,21 +72,29 @@ namespace gg.icarus {
 
     // ------------------------------------------------------------
     // -- collisions / triggers
-    void OnCollisionEnter(Collision collision) {
-      foreach (ContactPoint contact in collision.contacts) {
-        Debug.Log($"collision enter at mech {uid}");
-        Debug.DrawRay(contact.point, contact.normal, Color.white);
-      }
-      // if (collision.relativeVelocity.magnitude > 2) {
-        
-      // }
-    }
 
     void OnTriggerEnter(Collider other) {
-      Debug.Log($"trigger enter at mech {uid}");
+      Debug.Log($"trigger enter at mech {uid} by {other.tag}.tag");
       if (other.tag == "Player") {
         // collision with PlayerColider inside of VrCameraWarp
+        enterMechInterractable.SetActive(true);
       }
+    }
+
+    void OnTriggerExit(Collider other) {
+      Debug.Log($"trigger exit at mech {uid} by {other.tag}.tag");
+      if (other.tag == "Player") {
+        // collision with PlayerColider inside of VrCameraWarp
+        enterMechInterractable.SetActive(false);
+      }
+    }
+
+    void OnColliderEnter(Collider other) {
+      Debug.Log($"collider enter at mech {uid} by {other.tag}.tag");
+    }
+
+    void OnColliderExit(Collider other) {
+      Debug.Log($"collider exit at mech {uid} by {other.tag}.tag");
     }
 
     // ------------------------------------------------------------
