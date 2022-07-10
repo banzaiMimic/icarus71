@@ -4,6 +4,10 @@ namespace gg.icarus {
 
   public class EnterMechInterractable : MonoBehaviour {
 
+    void Awake() {
+      this.gameObject.SetActive(false);
+    }
+
     void OnTriggerEnter(Collider other) {
       Debug.Log($"EnterMech trigger enter by {other.tag}.tag");
     }
