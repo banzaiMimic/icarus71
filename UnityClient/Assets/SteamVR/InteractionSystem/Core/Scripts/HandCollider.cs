@@ -280,19 +280,24 @@ namespace Valve.VR.InteractionSystem
 
                 hand.hand.TriggerHapticPulse(length, 100, intensity);
             }
+
+            Dispatcher.INSTANCE.onHandCollisionEnter(collision);
+
+        }
+
+        void OnCollisionExit(Collision other) {
+          Dispatcher.INSTANCE.onHandCollisionExit(other);
         }
 
         void OnTriggerEnter(Collider other) {
-          Dispatcher.INSTANCE.Log($"[HandCollider] trigger enter on other.tag {other.tag}");
+          Dispatcher.INSTANCE.onHandTriggerEnter(other);
         }
 
         void OnTriggerExit(Collider other) {
-          Dispatcher.INSTANCE.Log($"[HandCollider] trigger exit on other.tag {other.tag}");
+          Dispatcher.INSTANCE.onHandTriggerExit(other);
         }
 
-        void OnCollisionExit(Collider other) {
-          Dispatcher.INSTANCE.Log($"[HandCollider] collision exit on other.tag {other.tag}");
-        }
+        
 
     }
 }

@@ -13,7 +13,7 @@ namespace IcarusGG {
     [SerializeField]
     private GameObject mechCockpit;                           // needs to be set manually for now
     private MechCockpit cockpit;
-    private bool isPiloted { get; set; }
+    private bool isPiloted { get; set; } = false;
     private bool isLooking = false;
     [SerializeField] 
     private bool invertCockpitY = true;
@@ -36,18 +36,18 @@ namespace IcarusGG {
     }
 
     void Update() {
-      // Vector3 viewingPoint = GetViewingPoint(viewDistance);
-      // Vector3 rotation = Camera.main.transform.localEulerAngles;
+      Vector3 viewingPoint = GetViewingPoint(viewDistance);
+      Vector3 rotation = Camera.main.transform.localEulerAngles;
 
       // if (manualOverride) {
       //   viewingPoint = viewTarget.position;
       //   rotation = rotateTarget.localEulerAngles;
       // }
 
-      // if (moveMech) {
-      //   MoveCockpit(rotation, viewingPoint);
-      // }
-      DrawVisionLine();
+      if (isPiloted) {
+        MoveCockpit(rotation, viewingPoint);
+        DrawVisionLine();
+      }
     }
 
     /**

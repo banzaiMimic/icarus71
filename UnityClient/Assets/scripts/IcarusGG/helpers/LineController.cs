@@ -17,8 +17,10 @@ public class LineController : MonoBehaviour {
   }
 
   private void Update() {
-    for (int i = 0; i < points.Length; i++) {
-      lr.SetPosition(i, points[i]);
+    if (points != null) {
+      for (int i = 0; i < points.Length; i++) {
+        lr.SetPosition(i, points[i]);
+      }
     }
   }
 
