@@ -20,7 +20,9 @@ public class PlayerManager : MonoBehaviour {
 
   public GameObject playerVr;
   private List<GameObject> networkPlayers = new List<GameObject>();
-  private GameObject teleporting;
+  private GameObject allowTeleport;
+  private Camera vrCam;                                                 // controlled by vr headset
+  private GameObject vrCamWrap;                                         // manually controller to move cam programatically
 
   void Awake() {
     
@@ -50,21 +52,34 @@ public class PlayerManager : MonoBehaviour {
 
   }
 
-  public GameObject SpawnPlayerVr(Vector3 position) {
-    playerVr = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+  private void initPlayerVr(Vector3 position) {
     Vector3 vrMenuPosition = new Vector3(position.x, position.y + 1.5f, 2);
     SpawnVrMenuManager(vrMenuPosition);
+    vrCam = playerVr.transform.Find("SteamVRObjects/VrCameraWrap/VRCamera").GetComponent<Camera>();
+    vrCamWrap = playerVr.transform.Find("SteamVRObjects/VrCameraWrap").gameObject;
+  }
+
+  private void allowPlayerTeleport() {
     Vector3 teleportPos = new Vector3(0, 0.01f, 0);
-    teleporting = Instantiate(Resources.Load("Teleporting"), teleportPos, Quaternion.identity) as GameObject;
+    allowTeleport = Instantiate(Resources.Load("Teleporting"), teleportPos, Quaternion.identity) as GameObject;
+  }
+
+  public GameObject SpawnPlayerVr(Vector3 position) {
+    playerVr = Instantiate(Resources.Load("PlayerVR"), position, Quaternion.identity) as GameObject;
+    initPlayerVr(position);
     return playerVr;
   }
 
   public Camera getVrCam() {
-    return playerVr.transform.Find("SteamVRObjects/VrCameraWrap/VRCamera").GetComponent<Camera>();
+    return vrCam;
+  }
+
+  private GameObject getVrCamWrap() {
+    return vrCamWrap;
   }
 
   public void EnterMech(Transform visorPosition) {
-    playerVr.transform.Find("SteamVRObjects/VrCameraWrap").gameObject.transform.position = visorPosition.position;
+    getVrCamWrap().transform.position = visorPosition.position;
   }
 
   public GameObject SpawnNetworkPlayer(Vector3 position) {

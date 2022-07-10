@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace icarus.gg {
+namespace gg.icarus {
 
   public class MechCockpit {
 
     private Mech mech;
     private GameObject go;
 
-    public MechCockpit(Mech mech, bool invertY) {
+    public MechCockpit(Mech mech, GameObject go, bool invertY) {
       this.mech = mech;
-      this.go = mech.gameObject;
+      this.go = go;
       if (invertY) {
         InvertY();
       }
@@ -21,7 +21,7 @@ namespace icarus.gg {
 
     public bool CanRotate(Vector3 rotateTo) {
 
-      Debug.Log($"rotation x = {rotateTo.x} vs {mech.xRotationMin} max {mech.xRotationMax}");
+      //Debug.Log($"rotation x = {rotateTo.x} vs {mech.xRotationMin} max {mech.xRotationMax}");
       
       return true;
       // Vector3 rotation = rotateTo;

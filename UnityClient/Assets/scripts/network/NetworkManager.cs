@@ -6,7 +6,7 @@ using DarkRift.Client;
 using DarkRift.Client.Unity;
 using UnityEngine;
 using UnityEngine.XR;
-using icarus.gg;
+using gg.icarus;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using ParrelSync;
@@ -79,7 +79,10 @@ public class NetworkManager : MonoBehaviour {
       if (IsVrAvailable()) {
         Debug.Log("VR available-- loading PlayerVR");
         PlayerManager.INSTANCE.SpawnPlayerVr(playerStartPoint);
-        PlayerManager.INSTANCE.EnterMech(visorOrigin.transform);
+
+        //@Recall .EnterMech( <actualMechObj /> )
+        
+        //PlayerManager.INSTANCE.EnterMech(visorOrigin.transform);
       } else {
         Debug.Log("VR not found-- loading keyboard / mouse [not implemented]");
         VrKill();

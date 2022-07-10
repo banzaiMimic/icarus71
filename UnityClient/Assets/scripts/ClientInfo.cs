@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR;
-using icarus.gg;
+using gg.icarus;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using ParrelSync;

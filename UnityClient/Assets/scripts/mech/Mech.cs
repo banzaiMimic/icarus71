@@ -1,20 +1,24 @@
 using System;
 using UnityEngine;
 
-namespace icarus.gg {
+namespace gg.icarus {
 
+  // currently attached to Mech 3d obj
   public class Mech : MonoBehaviour {
 
+    public String uid = Guid.NewGuid().ToString();
     public float xRotationMax = 30f;
     public float xRotationMin = -40f;
 
+    [SerializeField]
+    private GameObject mechCockpit;                           // needs to be set manually for now
     private MechCockpit cockpit;
     private bool isPiloted { get; set; }
     private bool isLooking = false;
-    [SerializeField]
-    private float viewDistance = 6f;
-    [SerializeField]
+    [SerializeField] 
     private bool invertCockpitY = true;
+    [SerializeField] 
+    private float viewDistance = 6f;
 
     // - dev.util
     [SerializeField] private bool manualOverride = false;
@@ -23,7 +27,8 @@ namespace icarus.gg {
     [SerializeField] private Transform rotateTarget;
 
     void Awake() {
-      cockpit = new MechCockpit( this, this.invertCockpitY );
+      cockpit = new MechCockpit( this, mechCockpit, this.invertCockpitY );
+      MechManager.INSTANCE.addMech(this);
     }
 
     void Update() {
@@ -51,8 +56,35 @@ namespace icarus.gg {
       }
     }
 
+    public void ShowEntrance() {
+
+    }
+
+    public void HideEntrance() {
+
+    }
+
     public void Enter(Transform visor) {
       isPiloted = true;
+    }
+
+    // ------------------------------------------------------------
+    // -- collisions / triggers
+    void OnCollisionEnter(Collision collision) {
+      foreach (ContactPoint contact in collision.contacts) {
+        Debug.Log($"collision enter at mech {uid}");
+        Debug.DrawRay(contact.point, contact.normal, Color.white);
+      }
+      // if (collision.relativeVelocity.magnitude > 2) {
+        
+      // }
+    }
+
+    void OnTriggerEnter(Collider other) {
+      Debug.Log($"trigger enter at mech {uid}");
+      if (other.tag == "Player") {
+        // collision with PlayerColider inside of VrCameraWarp
+      }
     }
 
     // ------------------------------------------------------------
@@ -75,3 +107,26 @@ namespace icarus.gg {
   }
 
 }
+
+/*
+Mech
+---
+
+showEntrance()
+
+hideEntrance()
+
+Enter()
+
+Exit()
+
+BoostTo()
+
+LookAt()
+
+- Walk()
+
+- Jump()
+
+// unity class to attach
+*/

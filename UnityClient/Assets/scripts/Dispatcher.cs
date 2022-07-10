@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace icarus.gg {
+namespace gg.icarus {
 
   public sealed class Dispatcher {
 
